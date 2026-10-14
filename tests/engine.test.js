@@ -74,6 +74,41 @@ test('catálogo: todos os tipos de corda presentes e faixas de tensão coerentes
   D.cordas.forEach((c) => assert.ok(c.preco_usd > 0, c.id + ' preço'));
 });
 
+test('híbridos: dados com fonte, tipos válidos e pelo menos 2 componentes', () => {
+  assert.ok(D.hibridos.length >= 10);
+  D.hibridos.forEach((h) => {
+    assert.ok(/^https:\/\//.test(h.fonte.url), h.id + ' sem fonte');
+    assert.equal(h.componentes.length, 2, h.id + ' componentes');
+    h.componentes.forEach((c) => { assert.ok(D.tipos[c.tipo], h.id + ' tipo'); assert.ok([null, 'principais', 'cruzadas'].includes(c.posicao)); });
+    assert.ok(h.preco_usd > 0);
+  });
+  assert.equal(new Set(D.hibridos.map((h) => h.id)).size, D.hibridos.length);
+});
+
+test('híbridos com dor atual: macia nos principais sobe; só poliéster desce e é marcado', () => {
+  const h = rec({ cotovelo: 'dor_atual' }).hibridos;
+  const pos = (id) => h.findIndex((x) => x.id === id);
+  assert.ok(pos('wilson-champions-choice-hybrid-16') < pos('solinco-hyper-g-16l-round-hybrid'));
+  assert.ok(h.find((x) => x.id === 'prince-vortex-triad-hybrid').evitar);
+  assert.ok(h.find((x) => x.id === 'volkl-v-fuse-hybrid-16').score < h.find((x) => x.id === 'wilson-champions-choice-hybrid-16').score);
+  assert.ok(h.find((x) => x.id === 'prince-warrior-hybrid-touch').avisos.length > 0);
+});
+
+test('híbridos: orçamento filtra e sugestões genéricas sempre aparecem com fonte', () => {
+  const o = rec({ orcamento_usd: 15 });
+  assert.ok(o.hibridos.every((x) => x.preco_usd <= 15));
+  assert.equal(o.fora_orcamento_hibridos, D.hibridos.filter((x) => x.preco_usd > 15).length);
+  ['nao', 'historico', 'dor_atual'].forEach((c) => {
+    const s = rec({ cotovelo: c }).sugestoes_hibrido;
+    assert.ok(s.length >= 1 && s.every((x) => /^https:\/\//.test(x.fonte.url)));
+  });
+});
+
+test('marcas incluídas: Volkl, Tecnifibre, Prince e Head Prestige', () => {
+  ['Volkl', 'Tecnifibre', 'Prince'].forEach((m) => assert.ok(D.raquetes.some((r) => r.marca === m), m));
+  assert.ok(D.raquetes.some((r) => /Prestige/.test(r.modelo)));
+});
+
 test('tensão sem valor ótimo usa a faixa inteira para quem não tem queixa', () => {
   const r = D.raquetes.find((x) => x.id === 'head-radical-mp-2025');
   const t = E.sugerirTensao(r, 'nao');

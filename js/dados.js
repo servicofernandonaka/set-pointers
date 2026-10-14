@@ -49,6 +49,20 @@
     R('dunlop-sx300-300-2025', 'Dunlop', 'SX 300 (300 g, 2025)', 100, 318, 4, 33.02, 318, 69, '23 / 26 / 23', 16, 19, { min: 45, max: 65 }, TWE, 'https://www.tenniswarehouse-europe.com/Dunlop_SX300_300g_2025_Racket/descpage-DSX3R.html?img=1'),
     R('tecnifibre-tf40-305-16x19', 'Tecnifibre', 'TF40 305 16x19', 98, 320, 3, 33.2, 320, 64, '22 / 22 / 22', 16, 19, { min: 49, max: 55 }, TWE, 'https://www.tenniswarehouse-europe.com/Raquette_Tecnifibre_TF40_305g_16x19/descpage-TF40R1.html?img=1'),
     R('prince-phantom-100x-305-2024', 'Prince', 'Phantom 100X 305 (2024)', 100, 323, 6, 32.49, 320, 59, '22 / 20,5 / 18', 16, 18, { min: 45, max: 55 }, TWE, 'https://www.tenniswarehouse-europe.com/Prince_Phantom_100X_305g_2024_Racket/descpage-PHNX5.html?img=1'),
+    R('prince-phantom-100x-290-2024', 'Prince', 'Phantom 100X 290 (2024)', 100, 303, 4, 33.02, 317, 59, '22 / 20,5 / 18', 16, 18, { min: 45, max: 55 }, TWE, 'https://www.tenniswarehouse-europe.com/Prince_Phantom_100X_290g_2024_Racket/descpage-PHNX9.html?img=1'),
+    R('prince-phantom-100p-310', 'Prince', 'Phantom 100P (310 g)', 100, 326, 6, 32.49, 324, 59, '20,5 / 19,5 / 16,5', 16, 18, { min: 48, max: 58 }, TWE, 'https://www.tenniswarehouse-europe.com/Prince_Phantom_100P_310g_Racket/descpageRCPRINCEH-PHNP1.html'),
+    R('prince-ripstick-100-300', 'Prince', 'Ripstick 100 (300 g)', 100, 318, 4, 33.02, 326, 67, '27 / 25,5 / 22', 16, 18, { min: 50, max: 60 }, TWE, 'https://www.tenniswarehouse-europe.com/Prince_Ripstick_100_300g_Racket_/descpage-PRPK30.html?img=1'),
+    R('prince-ripstick-100-280', 'Prince', 'Ripstick 100 (280 g)', 100, 295, -1, 34.54, 317, 66, '27 / 25,5 / 22', 16, 18, { min: 50, max: 60 }, TWE, 'https://www.tenniswarehouse-europe.com/Prince_Ripstick_100_280g_Racket_/descpageRCPRINCEH-PRPK28-EN.html', 'Balanço de 1 ponto head-heavy (valor negativo em balanco_pts_hl indica head-heavy).'),
+    R('volkl-v-cell-v1-pro', 'Volkl', 'V-Cell V1 Pro', 99, 315, 4, 33.02, 316, 68, '23 / 20 / 23', 16, 19, { min: 50, max: 60 }, TWE, 'https://www.tenniswarehouse-europe.com/Volkl_V-Cell_V1_Pro_Racket/descpage-VCEV1P.html?img=1'),
+    R('volkl-v-cell-v1-mp', 'Volkl', 'V-Cell V1 MP', 102, 301, 4, 32.99, 302, 68, '25 / 22 / 28', 16, 19, { min: 50, max: 60 }, TWE, 'https://www.tenniswarehouse-europe.com/Volkl_V-Cell_V1_MP_Racket/descpage-VCEV1M.html?img=5'),
+    R('volkl-v-cell-8-300', 'Volkl', 'V-Cell 8 (300 g)', 100, 312, 5, 32.64, 312, 67, '22 / 24 / 22', 16, 18, { min: 50, max: 60 }, TWE, 'https://www.tenniswarehouse-europe.com/Volkl_V-Cell_8_300g_Racket/descpage-VVC8L.html?img=3'),
+    R('volkl-vostra-v8-300', 'Volkl', 'Vostra V8 (300 g)', 100, 318, 5, 32.64, 323, 67, '22 / 24 / 22', 16, 18, { min: 50, max: 60 }, TWE, 'https://www.tenniswarehouse-europe.com/Volkl_Vostra_V8_300g_Racket/descpage-VOSV8M.html?img=1'),
+    R('tecnifibre-tf40-305-18x20', 'Tecnifibre', 'TF40 305 18x20', 98, 323, 3, 33.32, 330, 64, '22 / 22 / 22', 18, 20, { min: 49, max: 55 }, TWE, 'https://www.tenniswarehouse-europe.com/Tecnifibre_TF40_305g_18x20_Racket/descpage-TF40R2.html?img=1'),
+    R('tecnifibre-tf40-290-16x19', 'Tecnifibre', 'TF40 290 16x19', 98, 303, 3, 33.2, 312, 65, '22 / 22 / 22', 16, 19, { min: 49, max: 55 }, TWE, 'https://www.tenniswarehouse-europe.com/Tecnifibre_TF40_290g_16x19_Racket/descpageRCTECNIH-TF40R9-EN.html'),
+    R('tecnifibre-tfight-305s', 'Tecnifibre', 'TFight 305S', 98, 320, 6, 32.49, 324, 63, '22,5 / 22,5 / 22,5', 18, 19, { min: 50, max: 55 }, TWE, 'https://www.tenniswarehouse-europe.com/Tecnifibre_TFight_305S_Racket/descpageRCTECNIH-TF305S-EN.html'),
+    R('head-prestige-mp-2023', 'Head', 'Prestige MP 2023', 99, 326, 3, 33.2, 327, 62, '21,5 / 21,5 / 21,5', 18, 19, { min: 48, max: 57 }, TWE, 'https://www.tenniswarehouse-europe.com/Head_Prestige_MP_2023_Racket/descpageRCHEAD-HPRMP-EN.html'),
+    R('head-prestige-mp-l-2023', 'Head', 'Prestige MP L 2023', 99, 318, 6, 32.49, 309, 61, '21,5 / 21,5 / 21,5', 16, 19, { min: 48, max: 57 }, TWE, 'https://www.tenniswarehouse-europe.com/Head_Prestige_MP_L_2023_Racket/descpageRCHEAD-HPRMPL-EN.html'),
+    R('head-prestige-pro-2023', 'Head', 'Prestige Pro 2023', 98, 337, 7, 31.98, 324, 58, '20 / 20 / 20', 18, 20, { min: 48, max: 57 }, TWE, 'https://www.tenniswarehouse-europe.com/Head_Prestige_Pro_2023_Racket/descpageRCHEAD-PRPROR-EN.html'),
   ];
 
   /* tipo: 'poliester' | 'multifilamento' | 'tripa_natural' | 'sintetica' */
@@ -76,6 +90,45 @@
     C('gamma-synthetic-gut-16', 'Gamma', 'Synthetic Gut 16/1,30', 'sintetica', '16 / 1,30 mm', 4.99, 'Tripa sintética de náilon; a loja a descreve como opção equilibrada entre jogabilidade e durabilidade.', 'https://www.tennis-warehouse.com/Gamma_Synthetic_Gut_16_130_String/descpageACGAMMA-G16.html'),
   ];
 
+  /* Híbridos: dois tipos de corda no mesmo quadro (um nos principais, outro nas cruzadas).
+     "posicao": 'principais' | 'cruzadas' | null (a loja não informa). Só entra o que a ficha informa. */
+  const CAT = 'https://www.tennis-warehouse.com/Hybrid_Tennis_String/catpage-HYBRIDS.html';
+  const H = (id, marca, modelo, componentes, preco_usd, nota_loja, url, rotulo) =>
+    ({ id, marca, modelo, componentes, preco_usd, nota_loja, fonte: { rotulo: rotulo || 'Tennis Warehouse (categoria de híbridos)', url: url || CAT } });
+  const comp = (tipo, descricao, posicao) => ({ tipo, descricao, posicao: posicao || null });
+  const hibridos = [
+    H('wilson-champions-choice-hybrid-16', 'Wilson', "Champion's Choice Hybrid 16",
+      [comp('tripa_natural', 'Wilson Natural Gut 16/1,32 mm', 'principais'), comp('poliester', 'Luxilon ALU Power Rough 16L/1,25 mm', 'cruzadas')], 67.5,
+      'Tripa natural nos principais (maciez) e poliéster texturizado nas cruzadas (durabilidade, efeito e controle). A loja informa que o conjunto pode ser invertido para mais durabilidade e controle.',
+      'https://www.tennis-warehouse.com/Wilson_Champions_Choice_Hybrid_16_String/descpageACWILSON-WCC16.html', 'Tennis Warehouse (ficha)'),
+    H('babolat-rpm-blast-17-vs-touch-16', 'Babolat', 'RPM Blast 17 + VS Touch 16',
+      [comp('poliester', 'RPM Blast 17/1,25 mm'), comp('tripa_natural', 'VS Touch (tripa natural) 16/1,30 mm')], 49,
+      'A loja não informa qual corda vai em cada direção. Preço de uma edição comemorativa dos 150 anos; a categoria lista o mesmo valor.',
+      'https://www.tennis-warehouse.com/Babolat_RPM_Blast__Touch_VS_Hybrid_150_Years_String/descpageACBAB-RPMVS150.html', 'Tennis Warehouse (ficha)'),
+    H('volkl-v-fuse-hybrid-16', 'Volkl', 'V-Fuse Hybrid 16/1,30',
+      [comp('poliester', 'Cyclone (poliéster)', 'principais'), comp('tripa_natural', 'V-Icon (tripa natural)', 'cruzadas')], 29.99,
+      'Poliéster nos principais e tripa natural nas cruzadas, conforme a categoria da loja.'),
+    H('solinco-tour-bite-17-vanquish-16', 'Solinco', 'Tour Bite 17 + Vanquish 16',
+      [comp('poliester', 'Tour Bite 17/1,20 mm'), comp('multifilamento', 'Vanquish 16/1,30 mm')], 13.25,
+      'Co-poliéster com multifilamento: controle mantendo uma sensação mais macia (guia de híbridos da loja).'),
+    H('wilson-duo-power-alu-power-nxt-power', 'Wilson', 'Duo Power (ALU Power 1,25 + NXT Power 16)',
+      [comp('poliester', 'Luxilon ALU Power 1,25 mm'), comp('multifilamento', 'Wilson NXT Power 16')], 25.95, 'A loja lista as duas cordas, sem indicar a posição.'),
+    H('wilson-spin-effect-hybrid', 'Wilson', 'Spin Effect Hybrid',
+      [comp('multifilamento', 'Multifilamento macio'), comp('poliester', 'Co-poliéster firme')], 17.95, 'Mistura de multifilamento macio com co-poliéster firme; a loja não informa a posição.'),
+    H('wilson-nxt-duo-ii-hybrid-16', 'Wilson', 'NXT Duo II Hybrid 16',
+      [comp('poliester', 'Luxilon Adrenaline 16Lg (co-poliéster)'), comp('multifilamento', 'Wilson NXT 16')], 22.95, 'A loja diz que qualquer uma das duas pode ir nos principais.'),
+    H('prince-warrior-hybrid-touch', 'Prince', 'Warrior Hybrid Touch',
+      [comp('poliester', 'Co-poliéster'), comp('multifilamento', 'Multifilamento')], 10, 'A loja não informa a posição.'),
+    H('head-lynx-spin2-rpet-hybrid', 'Head', 'Lynx Spin2 rPET Hybrid',
+      [comp('poliester', 'Poliéster'), comp('poliester', 'Poliéster')], 14.5, 'Combinação poliéster com poliéster, voltada a efeito.'),
+    H('solinco-hyper-g-16l-round-hybrid', 'Solinco', 'Hyper-G 16L + Hyper-G Round 16L',
+      [comp('poliester', 'Hyper-G 16L (moldada)'), comp('poliester', 'Hyper-G Round 16L (redonda)')], 13.99, 'Combinação poliéster com poliéster.'),
+    H('solinco-hyper-mach-bd-hybrid', 'Solinco', 'Hyper-Mach BD Hybrid',
+      [comp('poliester', 'Poliéster'), comp('poliester', 'Poliéster')], 14.5, 'Combinação poliéster com poliéster.'),
+    H('prince-vortex-triad-hybrid', 'Prince', 'Vortex Triad Hybrid',
+      [comp('poliester', 'Poliéster'), comp('poliester', 'Poliéster')], 9.99, 'Combinação toda em poliéster.'),
+  ];
+
   /* Rigidez por TIPO de corda, conforme o guia da Tennis Warehouse: poliéster é o tipo mais rígido,
      tripa natural o mais macio, multifilamento é macio, sintética fica no meio. */
   const tipos = {
@@ -94,7 +147,9 @@
     specs: { rotulo: 'Tennis Companion: Racquet specs', url: 'https://tenniscompanion.org/racquet-specs/' },
     tensao_cotovelo: { rotulo: 'Mohandhas et al., Shoulder & Elbow 2016;8(3):184-191', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4950282' },
     revisao_cotovelo: { rotulo: 'De Smedt et al., Br J Sports Med 2007;41(11):816-819', url: 'https://pubmed.ncbi.nlm.nih.gov/17616547/' },
+    hibridos_guia: { rotulo: 'Tennis Warehouse: Best Hybrid Strings', url: 'https://www.tennis-warehouse.com/Learning_Center/Gear_Guides/Tennis_String/Best_Hybrid_Strings.html' },
+    hibridos_companion: { rotulo: 'Tennis Companion: Hybrid tennis strings', url: 'https://tenniscompanion.org/hybrid-tennis-strings/' },
   };
 
-  return { consulta: '2026-10-14', raquetes, cordas, tipos, fontes };
+  return { consulta: '2026-10-14', raquetes, cordas, hibridos, tipos, fontes };
 });

@@ -77,6 +77,48 @@
     return { id: c.id, nome: c.marca + ' ' + c.modelo, tipo: tipo.rotulo, preco_usd: c.preco_usd, score: s, motivos, avisos, evitar: p.cotovelo === 'dor_atual' && tipo.classe === 'rigida', fonte: c.fonte };
   }
 
+  /* Híbrido: os principais dominam a sensação (guia da Tennis Warehouse e Tennis Companion). Corda macia nos principais
+     é o arranjo mais amigável ao braço; só poliéster se comporta como poliéster. */
+  function pontuarHibrido(h, p, T, F) {
+    let s = 0; const motivos = []; const avisos = [];
+    const add = (pts, texto, fonte) => { s += pts; motivos.push({ pts, texto, fonte: fonte || 'convenção do projeto' }); };
+    const classes = h.componentes.map((c) => T[c.tipo].classe);
+    const temRigida = classes.includes('rigida');
+    const temMacia = classes.some((c) => c !== 'rigida');
+    const principais = h.componentes.find((c) => c.posicao === 'principais');
+    const cp = principais ? T[principais.tipo].classe : null;
+    const nomesTipos = h.componentes.map((c) => T[c.tipo].rotulo).join(' + ');
+    let evitar = false;
+    if (p.cotovelo !== 'nao') {
+      const k = p.cotovelo === 'dor_atual' ? 3 : 2;
+      if (!temRigida) add(k, nomesTipos + ': sem poliéster, em geral mais confortável para o braço.', F.guia_cordas.rotulo);
+      else if (!temMacia) { add(-(k + 1), 'Híbrido só de poliéster: mantém a rigidez do poliéster.', F.hibridos_guia.rotulo); avisos.push('Evitar com dor atual no cotovelo.'); evitar = p.cotovelo === 'dor_atual'; }
+      else if (cp && cp !== 'rigida') add(k - 1, 'Corda macia nos principais, que dominam a sensação, e poliéster só nas cruzadas.', F.hibridos_companion.rotulo);
+      else if (cp === 'rigida') { add(-1, 'Poliéster nos principais: a corda macia nas cruzadas ameniza pouco.', F.hibridos_companion.rotulo); avisos.push('Se possível, inverta: corda macia nos principais.'); }
+      else { add(1, 'Mistura com corda macia reduz parte da rigidez do poliéster.', F.hibridos_companion.rotulo); avisos.push('A loja não informa a posição: coloque a corda macia nos principais.'); }
+    } else {
+      if (temRigida && p.estilo === 'fundo_agressivo' && p.nivel !== 'iniciante') add(1, 'Golpes longos e rápidos: o poliéster dá controle, efeito e durabilidade.', F.hibridos_guia.rotulo);
+      if (!temMacia && p.nivel === 'iniciante') add(-1, 'Iniciante: poliéster puro pode ser rígido demais.', F.guia_cordas.rotulo);
+    }
+    return { id: h.id, nome: h.marca + ' ' + h.modelo, tipo: nomesTipos, preco_usd: h.preco_usd, score: s, motivos, avisos, evitar, fonte: h.fonte };
+  }
+
+  /* Montagens genéricas (não são produtos): orientação baseada nos guias citados. */
+  function sugestoesHibrido(p, F) {
+    const out = [];
+    if (p.cotovelo !== 'nao') {
+      out.push({ titulo: 'Se quiser um híbrido, ponha a corda macia nos principais', texto: 'Tripa natural ou multifilamento nos principais e, se desejar mais durabilidade, poliéster nas cruzadas. Os principais dominam a sensação; evitar poliéster puro.', fonte: F.hibridos_companion });
+      out.push({ titulo: 'Tensão mais baixa', texto: 'Use a parte inferior da faixa da raquete; há um estudo de laboratório de nível III com menor aceleração no cotovelo em tensão mais baixa.', fonte: F.tensao_cotovelo });
+    } else if (p.estilo === 'fundo_agressivo' && p.nivel !== 'iniciante') {
+      out.push({ titulo: 'Combinação clássica: tripa natural + poliéster', texto: 'Sensação, controle, durabilidade e efeito; poliéster nos principais dá mais controle e durabilidade.', fonte: F.hibridos_guia });
+    } else if (p.nivel === 'iniciante') {
+      out.push({ titulo: 'Multifilamento + tripa sintética', texto: 'Opção econômica que soma conforto e potência, com o multifilamento nos principais.', fonte: F.hibridos_companion });
+    } else {
+      out.push({ titulo: 'Multifilamento + poliéster', texto: 'Alternativa mais barata à tripa com poliéster: mantém conforto e soma durabilidade, controle e efeito.', fonte: F.hibridos_companion });
+    }
+    return out;
+  }
+
   const ordenar = (a, b) => b.score - a.score || a.nome.localeCompare(b.nome, 'pt-BR');
 
   function recomendar(perfil, D) {
@@ -89,11 +131,15 @@
       foraOrcamento = D.cordas.length - cordas.length;
     }
     const cordasP = cordas.map((c) => pontuarCorda(c, perfil, D.tipos, D.fontes)).sort(ordenar);
+    let hib = D.hibridos || [];
+    let foraOrcHib = 0;
+    if (perfil.orcamento_usd != null) { const n = hib.length; hib = hib.filter((h) => h.preco_usd <= perfil.orcamento_usd); foraOrcHib = n - hib.length; }
+    const hibridosP = hib.map((h) => pontuarHibrido(h, perfil, D.tipos, D.fontes)).sort(ordenar);
     const avisos = [];
     if (perfil.cotovelo !== 'nao') {
       avisos.push('Orientação geral de equipamento, não tratamento. A evidência é limitada: há um estudo de laboratório (nível III) mostrando menor aceleração no cotovelo com tensão mais baixa; não há evidência direta sobre rigidez do quadro ou tipo de corda. Dor persistente exige avaliação médica ou fisioterápica.');
     }
-    return { raquetes, cordas: cordasP, fora_orcamento: foraOrcamento, avisos };
+    return { raquetes, cordas: cordasP, hibridos: hibridosP, sugestoes_hibrido: sugestoesHibrido(perfil, D.fontes), fora_orcamento: foraOrcamento, fora_orcamento_hibridos: foraOrcHib, avisos };
   }
 
   return { LIM, ESTILOS, NIVEIS, COTOVELO, faixaRigidez, faixaSwing, fechado, sugerirTensao, recomendar };

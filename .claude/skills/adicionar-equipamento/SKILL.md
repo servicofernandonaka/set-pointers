@@ -10,6 +10,7 @@ description: Use ao adicionar ou atualizar raquetes ou cordas no site de tênis 
 - Dica: as páginas da Tennis Warehouse Europe (tenniswarehouse-europe.com, `descpage-<código>.html`) listam a ficha completa; as da loja dos EUA muitas vezes mostram só a faixa de tensão. Para achar a URL, uma busca curta como "tenniswarehouse-europe <modelo> racket descpage" resolve. Várias raquetes podem ser buscadas e abertas em paralelo.
 - Se a página não trouxer o campo, tente uma segunda fonte; se continuar sem dado, deixe `null`. Nunca preencher de memória.
 - Corda: tipo (poliéster, multifilamento, tripa natural, sintética), bitola, preço e fonte. Não inventar rigidez numérica.
+- Híbrido: objeto em `hibridos` com `componentes` (tipo e `posicao`: principais, cruzadas ou null se a loja não informa). Só registrar a posição se a ficha disser. A categoria de híbridos da loja lista muitos conjuntos de uma vez.
 
 ## 2. Registrar
 - Raquete: objeto em `raquetes` de `js/dados.js` (mesmos campos das existentes). Guardar a rigidez como a fonte a lista e anotar a origem em `nota` se for diferente da escala RA da loja.

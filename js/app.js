@@ -26,6 +26,17 @@
       '<p class="src"><a href="' + esc(o.fonte.url) + '" target="_blank" rel="noopener">' + esc(o.fonte.rotulo) + '</a></p></article>';
   }
 
+  const POS = { principais: 'principais', cruzadas: 'cruzadas' };
+  function cardHibrido(o, i, h) {
+    const comps = h.componentes.map((c) => '<li>' + esc(c.descricao) + (c.posicao ? ' <span class="nota">(' + POS[c.posicao] + ')</span>' : ' <span class="nota">(posição não informada)</span>') + '</li>').join('');
+    return '<article class="card"><h3>' + esc(o.nome) + '</h3><p class="sub">' + (i === 0 && !o.evitar ? '<span class="tag top">Melhor ajuste</span>' : '') +
+      (o.evitar ? '<span class="tag evitar">Evitar com dor atual</span>' : '') + '<span class="tag">' + esc(o.tipo) + '</span><span class="tag">US$ ' + o.preco_usd.toFixed(2).replace('.', ',') + '</span></p>' +
+      '<ul>' + comps + '</ul><p class="sub">' + esc(h.nota_loja) + '</p>' +
+      (o.motivos.length ? motivos(o.motivos) : '<p class="nota">Sem regra específica para este perfil.</p>') +
+      o.avisos.map((a) => '<p class="aviso">' + esc(a) + '</p>').join('') +
+      '<p class="src"><a href="' + esc(o.fonte.url) + '" target="_blank" rel="noopener">' + esc(o.fonte.rotulo) + '</a></p></article>';
+  }
+
   function render() {
     const f = $('#perfil');
     const orc = f.orcamento.value.trim();
@@ -41,6 +52,10 @@
     $('#h-cor').textContent = 'Cordas (' + cs.length + ')';
     $('#raquetes').innerHTML = rs.length ? rs.map((o, i) => cardRaquete(o, i, rq[o.id])).join('') : '<p class="nota">Nenhuma raquete desta marca no cadastro.</p>';
     $('#cordas').innerHTML = cs.length ? cs.map((o, i) => cardCorda(o, i, cd[o.id])).join('') : '<p class="nota">Nenhuma corda cadastrada com esses filtros e este orçamento.</p>';
+    const hb = Object.fromEntries(Dados.hibridos.map((x) => [x.id, x]));
+    $('#h-hib').textContent = 'Híbridos de corda (' + r.hibridos.length + ')';
+    $('#sug-hib').innerHTML = r.sugestoes_hibrido.map((s) => '<p class="aviso"><strong>' + esc(s.titulo) + '.</strong> ' + esc(s.texto) + ' <a href="' + esc(s.fonte.url) + '" target="_blank" rel="noopener">' + esc(s.fonte.rotulo) + '</a></p>').join('');
+    $('#hibridos').innerHTML = r.hibridos.length ? r.hibridos.map((o, i) => cardHibrido(o, i, hb[o.id])).join('') : '<p class="nota">Nenhum híbrido cadastrado dentro deste orçamento.</p>';
     $('#fora').textContent = r.fora_orcamento ? r.fora_orcamento + ' corda(s) acima do orçamento (preços consultados em ' + Dados.consulta + ').' : 'Preços consultados em ' + Dados.consulta + '; mudam com o tempo.';
   }
 

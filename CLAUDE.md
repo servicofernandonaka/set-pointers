@@ -8,7 +8,7 @@ Recomenda raquetes e cordas por estilo de jogo, nível, cotovelo (dor/histórico
 - Testes: `node --test tests/*.test.js`
 
 ## Estrutura (usar grep; não ler arquivos inteiros sem necessidade)
-- `js/dados.js`: raquetes, cordas, tipos de corda e fontes (dados, não lógica)
+- `js/dados.js`: raquetes, cordas, híbridos (dois tipos de corda), tipos de corda e fontes (dados, não lógica)
 - `js/engine.js`: motor de recomendação, sem DOM; limiares em `LIM` (convenção do projeto)
 - `js/app.js`: interface; `index.html`, `css/styles.css`
 - `tests/engine.test.js`: inclui teste de integridade dos dados (toda entrada precisa de fonte)
