@@ -77,6 +77,7 @@
   Object.keys(Dados.tipos).filter((t) => Dados.cordas.some((c) => c.tipo === t)).forEach((t) => ft.insertAdjacentHTML('beforeend', '<option value="' + esc(t) + '">' + esc(Dados.tipos[t].rotulo) + '</option>'));
 
   $('#fontes').innerHTML = '<strong>Fontes gerais:</strong> ' + Object.values(Dados.fontes).map((s) => '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.rotulo) + '</a>').join(' · ');
+  $('#n-raq').textContent = Dados.raquetes.length; $('#n-cor').textContent = Dados.cordas.length; $('#n-hib').textContent = Dados.hibridos.length; $('#n-data').textContent = Dados.consulta.split('-').reverse().join('/');
   $('#perfil').addEventListener('input', () => { mostrar.raq = PASSO; mostrar.cor = PASSO; render(); });
   document.addEventListener('click', (ev) => {
     const b = ev.target.closest('.mais-btn'); if (!b) return;

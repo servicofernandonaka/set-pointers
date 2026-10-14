@@ -80,3 +80,22 @@ a { color:var(--ac); } .src { font-size:.82rem; }
 .mais { display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:16px; } .mais .nota { margin:0; font:600 .78rem var(--mono); letter-spacing:.06em; text-transform:uppercase; }
 .mais-btn { font:700 .85rem var(--sans); letter-spacing:.08em; text-transform:uppercase; color:var(--tx); background:var(--card); border:2px solid var(--ink); border-radius:2px; padding:12px 22px; min-height:44px; cursor:pointer; }
 .mais-btn:hover { background:var(--bola); border-color:#a9c21f; color:#16210a; } .mais-btn:focus-visible { outline:3px solid var(--ac); outline-offset:3px; }
+
+/* Fotos */
+.faixa { position:relative; overflow:hidden; background:var(--ink); color:#fff; min-height:230px; display:flex; align-items:center; }
+.faixa > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 45%; }
+.faixa::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(10,29,59,.92) 0%, rgba(10,29,59,.7) 45%, rgba(10,29,59,.15) 100%); }
+.faixa-in { position:relative; z-index:1; max-width:1040px; width:100%; margin:0 auto; padding-block:36px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); }
+.nums { list-style:none; margin:8px 0 12px; padding:0; display:flex; flex-wrap:wrap; gap:8px 36px; }
+.nums li { display:flex; flex-direction:column; } .nums strong { font:800 clamp(2.4rem,7vw,3.6rem)/1 var(--mono); color:var(--bola); font-variant-numeric:tabular-nums; }
+.nums span { font:600 .72rem var(--mono); letter-spacing:.18em; text-transform:uppercase; color:#cfe0f3; }
+.faixa-nota { margin:0; font-size:.9rem; color:#cfe0f3; }
+.galeria { display:grid; grid-template-columns:1.7fr 1fr; gap:12px; margin-top:14px; }
+.galeria figure, .banner { position:relative; margin:0; overflow:hidden; border-radius:4px; background:var(--ink); }
+.galeria img, .banner img { display:block; width:100%; height:100%; object-fit:cover; }
+.galeria figure { min-height:260px; } .banner { height:230px; margin-top:14px; } .banner img { object-position:50% 55%; }
+figcaption { position:absolute; left:0; right:0; bottom:0; padding:28px 14px 12px; font-size:.84rem; line-height:1.4; color:#fff; background:linear-gradient(0deg, rgba(10,29,59,.92), rgba(10,29,59,0)); }
+.sobre { display:grid !important; grid-template-columns:minmax(0,1fr) 260px; gap:22px; align-items:stretch; }
+.sobre-img { width:100%; height:100%; min-height:200px; object-fit:cover; border-radius:3px; }
+.rodape { background:linear-gradient(rgba(10,29,59,.88), rgba(10,29,59,.94)), url(../img/tres-bolas.jpg) center/cover; padding-block:44px; }
+@media (max-width:760px) { .galeria { grid-template-columns:1fr; } .galeria figure { min-height:200px; } .sobre { grid-template-columns:1fr; } .sobre-img { height:180px; } .faixa::after { background:rgba(10,29,59,.78); } .banner { height:190px; } }

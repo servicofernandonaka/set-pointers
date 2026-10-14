@@ -22,6 +22,14 @@
       <div id="hero-arte" class="hero-arte"></div>
     </div>
   </header>
+  <section class="faixa" aria-label="Resumo do catálogo">
+    <img src="img/bola-na-raquete.jpg" alt="Bola de tênis amarela batendo nas cordas de uma raquete cinza, com pó de quadra no ar" loading="lazy" width="1800" height="1207">
+    <div class="faixa-in">
+      <p class="eyebrow">O catálogo</p>
+      <ul class="nums"><li><strong id="n-raq">0</strong><span>raquetes</span></li><li><strong id="n-cor">0</strong><span>cordas</span></li><li><strong id="n-hib">0</strong><span>híbridos</span></li></ul>
+      <p class="faixa-nota">Cada número tem fonte. Preços consultados em <span id="n-data"></span>.</p>
+    </div>
+  </section>
   <main>
     <section aria-labelledby="h-estilo">
       <h2 id="h-estilo" class="sec">Qual é o seu jogo?</h2>
@@ -66,18 +74,21 @@
       </label>
     </form>
     <div id="avisos"></div>
-    <section aria-labelledby="h-raq"><h2 class="titulo-sec"><span id="ic-raquete" class="ic"></span><span id="h-raq">Raquetes</span></h2><div id="raquetes" class="lista"></div><div id="mais-raq" class="mais"></div></section>
-    <section aria-labelledby="h-cor"><h2 class="titulo-sec"><span id="ic-corda" class="ic"></span><span id="h-cor">Cordas</span></h2><p id="fora" class="nota"></p><div id="cordas" class="lista"></div><div id="mais-cor" class="mais"></div></section>
+    <section aria-labelledby="h-raq"><h2 class="titulo-sec"><span id="ic-raquete" class="ic"></span><span id="h-raq">Raquetes</span></h2><div class="galeria g-raq">
+        <figure><img src="img/raquete-flutuando.jpg" alt="Raquete de tênis preta, de grafite, flutuando sobre fundo cinza claro" loading="lazy" width="1600" height="893"><figcaption>Rigidez, swingweight e padrão de cordas são os números que o site usa para ordenar as raquetes.</figcaption></figure>
+        <figure><img src="img/quadro-grafite.jpg" alt="Detalhe do quadro de grafite de uma raquete, com a trama da fibra de carbono" loading="lazy" width="900" height="1117"><figcaption>Quadro de grafite: a rigidez (RA) vem da ficha da loja.</figcaption></figure>
+      </div><div id="raquetes" class="lista"></div><div id="mais-raq" class="mais"></div></section>
+    <section aria-labelledby="h-cor"><h2 class="titulo-sec"><span id="ic-corda" class="ic"></span><span id="h-cor">Cordas</span></h2><p id="fora" class="nota"></p><figure class="banner"><img src="img/corda-detalhe.jpg" alt="Detalhe de uma corda de tênis translúcida e texturizada em foco, sobre fundo escuro" loading="lazy" width="1200" height="1200"><figcaption>O tipo de corda (poliéster, multifilamento, tripa natural ou sintética) separa as mais macias das mais rígidas.</figcaption></figure><div id="cordas" class="lista"></div><div id="mais-cor" class="mais"></div></section>
     <section aria-labelledby="h-hib"><h2 class="titulo-sec"><span id="ic-hibrido" class="ic"></span><span id="h-hib">Híbridos de corda</span></h2>
       <p class="nota">Híbrido é usar um tipo de corda nos principais (verticais) e outro nas cruzadas (horizontais). Os principais dominam a sensação.</p>
-      <div id="sug-hib"></div><div id="hibridos" class="lista"></div>
+      <figure class="banner"><img src="img/malha-cordas.jpg" alt="Detalhe macro do encordoamento de uma raquete: cordas principais cruzando as cruzadas" loading="lazy" width="1100" height="1366"><figcaption>Híbrido: uma corda nos principais (verticais) e outra nas cruzadas (horizontais).</figcaption></figure><div id="sug-hib"></div><div id="hibridos" class="lista"></div>
     </section>
-    <section class="painel nota">
+    <section class="painel nota sobre"><div class="sobre-txt">
       <h2>Como ler</h2>
       <p>A ordem vem de regras simples e abertas, mostradas em cada cartão. Os limites (por exemplo, rigidez a partir de 65 é "rígida") são convenção deste projeto, não norma. A rigidez é a listada pela loja (escala RA). Preços são de consulta pontual e mudam.</p>
       <p>Esta ferramenta não trata nem diagnostica lesão. Dor persistente no cotovelo precisa de avaliação médica ou fisioterápica.</p>
       <p id="fontes"></p>
-    </section>
+    </div><img class="sobre-img" src="img/grips-cruzados.jpg" alt="Duas empunhaduras de raquete cruzadas, com fita perfurada preta, em close" loading="lazy" width="800" height="993"></section>
   </main>
   <footer class="rodape"><span>Set Pointers · dados de lojas e guias citados em cada cartão · não substitui avaliação médica ou de um encordoador</span></footer>
   <script src="js/dados.js"></script>

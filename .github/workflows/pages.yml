@@ -21,7 +21,7 @@ jobs:
       - name: Rodar testes
         run: node --test tests/*.test.js
       - name: Montar a pasta do site
-        run: mkdir _site && cp -r index.html css js _site/
+        run: mkdir _site && cp -r index.html css js img _site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true
