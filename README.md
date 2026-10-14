@@ -9,3 +9,6 @@ Cada especificação tem fonte; sem fonte, o campo fica vazio. Não trata nem di
 - Limiares do motor (por exemplo, rigidez a partir de 65 = rígida) são convenção do projeto, não norma.
 
 Evidência sobre cotovelo: um estudo de laboratório de nível III mostra menor aceleração no cotovelo com tensão mais baixa (Mohandhas et al., Shoulder & Elbow 2016); não há evidência direta sobre rigidez do quadro ou tipo de corda.
+
+## Licença
+Todos os direitos reservados. Veja o arquivo LICENSE: o código não pode ser usado, copiado ou modificado sem autorização por escrito.
