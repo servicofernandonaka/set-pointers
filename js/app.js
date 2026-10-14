@@ -26,7 +26,7 @@
       '<p class="src"><a href="' + esc(o.fonte.url) + '" target="_blank" rel="noopener">' + esc(o.fonte.rotulo) + '</a></p></article>';
   }
 
-  const POS = { principais: 'principais', cruzadas: 'cruzadas' };
+  const POS = { principais: 'principais', cruzadas: 'cruzadas', livre: 'posição livre' };
   function cardHibrido(o, i, h) {
     const comps = h.componentes.map((c) => '<li>' + esc(c.descricao) + (c.posicao ? ' <span class="nota">(' + POS[c.posicao] + ')</span>' : ' <span class="nota">(posição não informada)</span>') + '</li>').join('');
     return '<article class="card"><h3>' + esc(o.nome) + '</h3><p class="sub">' + (i === 0 && !o.evitar ? '<span class="tag top">Melhor ajuste</span>' : '') +
@@ -61,7 +61,7 @@
 
   const fm = $('#perfil').marca, ft = $('#perfil').tipo;
   Array.from(new Set(Dados.raquetes.map((x) => x.marca))).sort().forEach((m) => fm.insertAdjacentHTML('beforeend', '<option value="' + esc(m) + '">' + esc(m) + '</option>'));
-  Object.keys(Dados.tipos).forEach((t) => ft.insertAdjacentHTML('beforeend', '<option value="' + esc(t) + '">' + esc(Dados.tipos[t].rotulo) + '</option>'));
+  Object.keys(Dados.tipos).filter((t) => Dados.cordas.some((c) => c.tipo === t)).forEach((t) => ft.insertAdjacentHTML('beforeend', '<option value="' + esc(t) + '">' + esc(Dados.tipos[t].rotulo) + '</option>'));
 
   $('#fontes').innerHTML = '<strong>Fontes gerais:</strong> ' + Object.values(Dados.fontes).map((s) => '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.rotulo) + '</a>').join(' · ');
   $('#perfil').addEventListener('input', render);

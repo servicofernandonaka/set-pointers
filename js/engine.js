@@ -88,17 +88,23 @@
     const principais = h.componentes.find((c) => c.posicao === 'principais');
     const cp = principais ? T[principais.tipo].classe : null;
     const nomesTipos = h.componentes.map((c) => T[c.tipo].rotulo).join(' + ');
+    const nomeRig = Array.from(new Set(h.componentes.filter((c) => T[c.tipo].classe === 'rigida').map((c) => T[c.tipo].rotulo.toLowerCase()))).join(' e ');
+    const temAramida = h.componentes.some((c) => c.tipo === 'aramida');
+    const livre = h.componentes.some((c) => c.posicao === 'livre');
     let evitar = false;
     if (p.cotovelo !== 'nao') {
       const k = p.cotovelo === 'dor_atual' ? 3 : 2;
       if (!temRigida) add(k, nomesTipos + ': sem poliéster, em geral mais confortável para o braço.', F.guia_cordas.rotulo);
-      else if (!temMacia) { add(-(k + 1), 'Híbrido só de poliéster: mantém a rigidez do poliéster.', F.hibridos_guia.rotulo); avisos.push('Evitar com dor atual no cotovelo.'); evitar = p.cotovelo === 'dor_atual'; }
+      else if (!temMacia) { add(-(k + 1), 'Híbrido só de ' + nomeRig + ': mantém a rigidez dessas cordas.', F.hibridos_guia.rotulo); avisos.push('Evitar com dor atual no cotovelo.'); evitar = p.cotovelo === 'dor_atual'; }
+      else if (temAramida) { add(-k, 'Aramida (Kevlar): a loja a descreve como a corda mais rígida e de baixa potência; a outra corda ameniza pouco.', F.aramida.rotulo); avisos.push('Kevlar exige tensão menor (a Ashaway indica 10 a 15% abaixo da de náilon).'); if (p.cotovelo === 'dor_atual') { avisos.push('Evitar com dor atual no cotovelo.'); evitar = true; } }
       else if (cp && cp !== 'rigida') add(k - 1, 'Corda macia nos principais, que dominam a sensação, e poliéster só nas cruzadas.', F.hibridos_companion.rotulo);
-      else if (cp === 'rigida') { add(-1, 'Poliéster nos principais: a corda macia nas cruzadas ameniza pouco.', F.hibridos_companion.rotulo); avisos.push('Se possível, inverta: corda macia nos principais.'); }
-      else { add(1, 'Mistura com corda macia reduz parte da rigidez do poliéster.', F.hibridos_companion.rotulo); avisos.push('A loja não informa a posição: coloque a corda macia nos principais.'); }
+      else if (cp === 'rigida') { add(-1, 'Corda rígida nos principais: a corda macia nas cruzadas ameniza pouco.', F.hibridos_companion.rotulo); avisos.push('Se possível, inverta: corda macia nos principais.'); }
+      else { add(1, 'Mistura com corda macia reduz parte da rigidez do poliéster.', F.hibridos_companion.rotulo); avisos.push(livre ? 'A loja diz que qualquer uma pode ir nos principais: coloque a corda macia nos principais.' : 'A loja não informa a posição: coloque a corda macia nos principais.'); }
     } else {
-      if (temRigida && p.estilo === 'fundo_agressivo' && p.nivel !== 'iniciante') add(1, 'Golpes longos e rápidos: o poliéster dá controle, efeito e durabilidade.', F.hibridos_guia.rotulo);
-      if (!temMacia && p.nivel === 'iniciante') add(-1, 'Iniciante: poliéster puro pode ser rígido demais.', F.guia_cordas.rotulo);
+      if (h.componentes.some((c) => c.tipo === 'poliester') && p.estilo === 'fundo_agressivo' && p.nivel !== 'iniciante') add(1, 'Golpes longos e rápidos: o poliéster dá controle, efeito e durabilidade.', F.hibridos_guia.rotulo);
+      if (!temMacia && p.nivel === 'iniciante') add(-1, 'Iniciante: híbrido só de corda rígida pode ser rígido demais.', F.guia_cordas.rotulo);
+      if (temAramida && p.nivel === 'iniciante') add(-1, 'Kevlar: a loja o indica a quem quebra muita corda, não a iniciantes.', F.aramida.rotulo);
+      if (temAramida && p.estilo === 'fundo_agressivo' && p.nivel !== 'iniciante') add(1, 'Golpes longos e muito topspin: Kevlar dá durabilidade (indicação da loja para quem quebra corda).', F.aramida.rotulo);
     }
     return { id: h.id, nome: h.marca + ' ' + h.modelo, tipo: nomesTipos, preco_usd: h.preco_usd, score: s, motivos, avisos, evitar, fonte: h.fonte };
   }

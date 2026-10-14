@@ -60,7 +60,7 @@ test('iniciante: poliéster é penalizado e o topo é um quadro leve', () => {
 });
 
 test('catálogo: todos os tipos de corda presentes e faixas de tensão coerentes', () => {
-  Object.keys(D.tipos).forEach((t) => assert.ok(D.cordas.some((c) => c.tipo === t), 'sem corda do tipo ' + t));
+  Object.keys(D.tipos).forEach((t) => assert.ok(D.cordas.some((c) => c.tipo === t) || D.hibridos.some((h) => h.componentes.some((c) => c.tipo === t)), 'tipo sem uso: ' + t));
   D.raquetes.forEach((r) => {
     if (r.tensao_lb) {
       assert.ok(r.tensao_lb.min < r.tensao_lb.max, r.id + ' faixa invertida');
@@ -79,7 +79,7 @@ test('híbridos: dados com fonte, tipos válidos e pelo menos 2 componentes', ()
   D.hibridos.forEach((h) => {
     assert.ok(/^https:\/\//.test(h.fonte.url), h.id + ' sem fonte');
     assert.equal(h.componentes.length, 2, h.id + ' componentes');
-    h.componentes.forEach((c) => { assert.ok(D.tipos[c.tipo], h.id + ' tipo'); assert.ok([null, 'principais', 'cruzadas'].includes(c.posicao)); });
+    h.componentes.forEach((c) => { assert.ok(D.tipos[c.tipo], h.id + ' tipo'); assert.ok([null, 'principais', 'cruzadas', 'livre'].includes(c.posicao)); });
     assert.ok(h.preco_usd > 0);
   });
   assert.equal(new Set(D.hibridos.map((h) => h.id)).size, D.hibridos.length);
@@ -140,4 +140,30 @@ test('perfil inválido gera erro', () => {
   assert.throws(() => rec({ cotovelo: 'x' }));
   assert.throws(() => rec({ orcamento_usd: -5 }));
   assert.throws(() => E.recomendar(null, D));
+});
+
+test('Kevlar: híbridos com aramida perdem pontos com cotovelo e são evitados com dor atual', () => {
+  const h = rec({ cotovelo: 'dor_atual' }).hibridos;
+  ['prince-problend-duraflex-16', 'ashaway-crossfire-ii-16', 'ashaway-crossfire-zx-17'].forEach((id) => {
+    const x = h.find((y) => y.id === id);
+    assert.equal(x.evitar, true, id); assert.ok(x.score < 0, id);
+  });
+  assert.equal(rec({ cotovelo: 'historico' }).hibridos.find((y) => y.id === 'prince-problend-duraflex-16').evitar, false);
+  assert.notEqual(h[0].tipo.includes('Kevlar'), true);
+});
+
+test('Kevlar sem queixa: fundo agressivo avançado ganha ponto; iniciante perde', () => {
+  const sc = (o) => rec(o).hibridos.find((y) => y.id === 'prince-problend-duraflex-16').score;
+  assert.equal(sc({ estilo: 'fundo_agressivo', nivel: 'avancado' }), 1);
+  assert.equal(sc({ nivel: 'iniciante' }), -1);
+});
+
+test('posição livre: Duo Feel com dor atual sobe e avisa para pôr a macia nos principais', () => {
+  const x = rec({ cotovelo: 'dor_atual' }).hibridos.find((y) => y.id === 'wilson-duo-feel-element-nxt-16');
+  assert.equal(x.score, 1); assert.ok(x.avisos[0].includes('qualquer uma'));
+});
+
+test('Head Prestige Tour 2023 cadastrada com a ficha da loja', () => {
+  const r = D.raquetes.find((x) => x.id === 'head-prestige-tour-2023');
+  assert.deepEqual([r.cabeca_pol2, r.peso_g, r.swingweight, r.rigidez, r.balanco_pts_hl, r.balanco_cm], [95, 315, 330, 62, 9, 31.5]);
 });
