@@ -7,6 +7,7 @@ description: Use ao adicionar ou atualizar raquetes ou cordas no site de tênis 
 
 ## 1. Coletar com fonte (gasta poucos tokens)
 - Peça ao Fernando os modelos. Para cada um, abra a ficha técnica (WebFetch na página da loja ou do fabricante) com um prompt curto: "extraia cabeça, peso, balanço, swingweight, rigidez, viga, padrão". Não leia a página inteira.
+- Dica: as páginas da Tennis Warehouse Europe (tenniswarehouse-europe.com, `descpage-<código>.html`) listam a ficha completa; as da loja dos EUA muitas vezes mostram só a faixa de tensão. Para achar a URL, uma busca curta como "tenniswarehouse-europe <modelo> racket descpage" resolve. Várias raquetes podem ser buscadas e abertas em paralelo.
 - Se a página não trouxer o campo, tente uma segunda fonte; se continuar sem dado, deixe `null`. Nunca preencher de memória.
 - Corda: tipo (poliéster, multifilamento, tripa natural, sintética), bitola, preço e fonte. Não inventar rigidez numérica.
 

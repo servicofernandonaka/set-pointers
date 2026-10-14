@@ -28,7 +28,11 @@
   function sugerirTensao(r, cotovelo) {
     const t = r.tensao_lb;
     if (!t) return null;
-    if (cotovelo === 'nao') return { min: t.otima, max: t.otima, texto: 'Tensão ótima indicada pela loja: ' + t.otima + ' lb' };
+    if (cotovelo === 'nao') {
+      return t.otima != null
+        ? { min: t.otima, max: t.otima, texto: 'Tensão ótima indicada pela loja: ' + t.otima + ' lb (faixa ' + t.min + ' a ' + t.max + ' lb)' }
+        : { min: t.min, max: t.max, texto: 'Faixa indicada pela loja: ' + t.min + ' a ' + t.max + ' lb' };
+    }
     const teto = Math.round(t.min + (t.max - t.min) / 3);
     return { min: t.min, max: teto, texto: 'Parte inferior da faixa (' + t.min + ' a ' + teto + ' lb, dentro de ' + t.min + ' a ' + t.max + ' lb)' };
   }

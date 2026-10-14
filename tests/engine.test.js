@@ -52,10 +52,32 @@ test('sem cotovelo: fundo agressivo avançado pode preferir poliéster', () => {
   assert.equal(c[0].tipo, 'Poliéster');
 });
 
-test('iniciante: poliéster é penalizado e quadro leve sobe', () => {
+test('iniciante: poliéster é penalizado e o topo é um quadro leve', () => {
   const o = rec({ nivel: 'iniciante' });
-  assert.equal(o.raquetes[0].id, 'wilson-clash-100-v3');
-  assert.ok(o.cordas.find((x) => x.tipo === 'Poliéster').score < 0);
+  assert.equal(o.raquetes[0].swingweight, 'leve');
+  assert.ok(o.raquetes[0].score >= o.raquetes[o.raquetes.length - 1].score);
+  o.cordas.filter((x) => x.tipo === 'Poliéster').forEach((x) => assert.ok(x.score < 0));
+});
+
+test('catálogo: todos os tipos de corda presentes e faixas de tensão coerentes', () => {
+  Object.keys(D.tipos).forEach((t) => assert.ok(D.cordas.some((c) => c.tipo === t), 'sem corda do tipo ' + t));
+  D.raquetes.forEach((r) => {
+    if (r.tensao_lb) {
+      assert.ok(r.tensao_lb.min < r.tensao_lb.max, r.id + ' faixa invertida');
+      if (r.tensao_lb.otima != null) assert.ok(r.tensao_lb.otima >= r.tensao_lb.min && r.tensao_lb.otima <= r.tensao_lb.max, r.id + ' ótima fora da faixa');
+    }
+    assert.ok(r.padrao.mains > 0 && r.padrao.cross > 0, r.id + ' padrão');
+    assert.ok(r.peso_g > 250 && r.peso_g < 400, r.id + ' peso fora do esperado');
+    assert.ok(r.swingweight > 280 && r.swingweight < 360, r.id + ' swingweight fora do esperado');
+    assert.ok(r.rigidez > 40 && r.rigidez < 80, r.id + ' rigidez fora do esperado');
+  });
+  D.cordas.forEach((c) => assert.ok(c.preco_usd > 0, c.id + ' preço'));
+});
+
+test('tensão sem valor ótimo usa a faixa inteira para quem não tem queixa', () => {
+  const r = D.raquetes.find((x) => x.id === 'head-radical-mp-2025');
+  const t = E.sugerirTensao(r, 'nao');
+  assert.deepEqual([t.min, t.max], [48, 57]);
 });
 
 test('orçamento filtra cordas e informa quantas ficaram de fora', () => {

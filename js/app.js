@@ -35,10 +35,18 @@
     const rq = Object.fromEntries(Dados.raquetes.map((x) => [x.id, x]));
     const cd = Object.fromEntries(Dados.cordas.map((x) => [x.id, x]));
     $('#avisos').innerHTML = r.avisos.map((a) => '<p class="aviso">' + esc(a) + '</p>').join('');
-    $('#raquetes').innerHTML = r.raquetes.map((o, i) => cardRaquete(o, i, rq[o.id])).join('');
-    $('#cordas').innerHTML = r.cordas.length ? r.cordas.map((o, i) => cardCorda(o, i, cd[o.id])).join('') : '<p class="nota">Nenhuma corda cadastrada dentro deste orçamento.</p>';
+    const rs = r.raquetes.filter((o) => !f.marca.value || rq[o.id].marca === f.marca.value);
+    const cs = r.cordas.filter((o) => !f.tipo.value || cd[o.id].tipo === f.tipo.value);
+    $('#h-raq').textContent = 'Raquetes (' + rs.length + ')';
+    $('#h-cor').textContent = 'Cordas (' + cs.length + ')';
+    $('#raquetes').innerHTML = rs.length ? rs.map((o, i) => cardRaquete(o, i, rq[o.id])).join('') : '<p class="nota">Nenhuma raquete desta marca no cadastro.</p>';
+    $('#cordas').innerHTML = cs.length ? cs.map((o, i) => cardCorda(o, i, cd[o.id])).join('') : '<p class="nota">Nenhuma corda cadastrada com esses filtros e este orçamento.</p>';
     $('#fora').textContent = r.fora_orcamento ? r.fora_orcamento + ' corda(s) acima do orçamento (preços consultados em ' + Dados.consulta + ').' : 'Preços consultados em ' + Dados.consulta + '; mudam com o tempo.';
   }
+
+  const fm = $('#perfil').marca, ft = $('#perfil').tipo;
+  Array.from(new Set(Dados.raquetes.map((x) => x.marca))).sort().forEach((m) => fm.insertAdjacentHTML('beforeend', '<option value="' + esc(m) + '">' + esc(m) + '</option>'));
+  Object.keys(Dados.tipos).forEach((t) => ft.insertAdjacentHTML('beforeend', '<option value="' + esc(t) + '">' + esc(Dados.tipos[t].rotulo) + '</option>'));
 
   $('#fontes').innerHTML = '<strong>Fontes gerais:</strong> ' + Object.values(Dados.fontes).map((s) => '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.rotulo) + '</a>').join(' · ');
   $('#perfil').addEventListener('input', render);
