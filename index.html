@@ -3,15 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Raquetes e cordas de tênis</title>
+  <title>Set Pointers: raquetes e cordas de tênis</title>
+  <meta name="description" content="Set Pointers: encontre raquete e corda de tênis pelo seu estilo de jogo, nível, cotovelo e orçamento. Todo dado com fonte.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23d7f23a' stroke='%239db81c' stroke-width='2'/%3E%3Cpath d='M6 20Q26 32 6 46M58 18Q38 32 58 48' fill='none' stroke='%23fff' stroke-width='3.2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="topo">
-    <h1>Raquetes e cordas de tênis</h1>
-    <p>Escolha por estilo de jogo, nível, cotovelo e orçamento. Cada número tem fonte.</p>
+    <div id="quadra" class="quadra"></div>
+    <div class="topo-in">
+      <div class="marca"><span id="logo" class="logo"></span><h1>Set <em>Pointers</em></h1></div>
+      <p class="lema">A raquete e a corda certas para o seu jogo, e para o seu cotovelo.</p>
+      <p class="mini">Escolha por estilo, nível, cotovelo e orçamento. Cada número tem fonte.</p>
+    </div>
+    <span class="bola-quica" aria-hidden="true"></span>
   </header>
   <main>
+    <section aria-labelledby="h-estilo">
+      <h2 id="h-estilo">Qual é o seu jogo?</h2>
+      <p class="nota">Toque no personagem que mais se parece com você. Ele ajusta o filtro de estilo abaixo.</p>
+      <div id="estilos" class="estilos"></div>
+      <p class="nota cred">Personagens originais, criados para este site; não representam jogadores reais.</p>
+    </section>
     <form id="perfil" class="painel" aria-label="Perfil do jogador">
       <label>Estilo de jogo
         <select name="estilo">
@@ -46,9 +59,9 @@
       </label>
     </form>
     <div id="avisos"></div>
-    <section aria-labelledby="h-raq"><h2 id="h-raq">Raquetes</h2><div id="raquetes" class="lista"></div></section>
-    <section aria-labelledby="h-cor"><h2 id="h-cor">Cordas</h2><p id="fora" class="nota"></p><div id="cordas" class="lista"></div></section>
-    <section aria-labelledby="h-hib"><h2 id="h-hib">Híbridos de corda</h2>
+    <section aria-labelledby="h-raq"><h2 class="titulo-sec"><span id="ic-raquete" class="ic"></span><span id="h-raq">Raquetes</span></h2><div id="raquetes" class="lista"></div></section>
+    <section aria-labelledby="h-cor"><h2 class="titulo-sec"><span id="ic-corda" class="ic"></span><span id="h-cor">Cordas</span></h2><p id="fora" class="nota"></p><div id="cordas" class="lista"></div></section>
+    <section aria-labelledby="h-hib"><h2 class="titulo-sec"><span id="ic-hibrido" class="ic"></span><span id="h-hib">Híbridos de corda</span></h2>
       <p class="nota">Híbrido é usar um tipo de corda nos principais (verticais) e outro nas cruzadas (horizontais). Os principais dominam a sensação.</p>
       <div id="sug-hib"></div><div id="hibridos" class="lista"></div>
     </section>
@@ -59,8 +72,10 @@
       <p id="fontes"></p>
     </section>
   </main>
+  <footer class="rodape"><span>Set Pointers · dados de lojas e guias citados em cada cartão · não substitui avaliação médica ou de um encordoador</span></footer>
   <script src="js/dados.js"></script>
   <script src="js/engine.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/art.js"></script>
 </body>
 </html>

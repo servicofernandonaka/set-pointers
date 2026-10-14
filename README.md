@@ -1,4 +1,4 @@
-# Raquetes e cordas de tênis
+# Set Pointers: raquetes e cordas de tênis
 
 Site estático (HTML, CSS e JavaScript puro) que ordena raquetes e cordas por estilo de jogo, nível, cotovelo (dor ou histórico) e orçamento.
 Cada especificação tem fonte; sem fonte, o campo fica vazio. Não trata nem diagnostica lesão.
