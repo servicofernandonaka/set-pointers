@@ -76,3 +76,7 @@ a { color:var(--ac); } .src { font-size:.82rem; }
 
 @media (max-width:760px) { .topo { background:linear-gradient(180deg, #091c3a 0%, #0e2b57 55%, #4a86c6 82%, var(--azul-bebe) 100%); padding-top:32px; } .topo-in { grid-template-columns:1fr; } .hero-arte { display:none; } .topo-txt { padding-bottom:72px; } }
 @media (prefers-reduced-motion: reduce) { .estilo { transition:none; } }
+
+.mais { display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:16px; } .mais .nota { margin:0; font:600 .78rem var(--mono); letter-spacing:.06em; text-transform:uppercase; }
+.mais-btn { font:700 .85rem var(--sans); letter-spacing:.08em; text-transform:uppercase; color:var(--tx); background:var(--card); border:2px solid var(--ink); border-radius:2px; padding:12px 22px; min-height:44px; cursor:pointer; }
+.mais-btn:hover { background:var(--bola); border-color:#a9c21f; color:#16210a; } .mais-btn:focus-visible { outline:3px solid var(--ac); outline-offset:3px; }

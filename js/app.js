@@ -37,6 +37,17 @@
       '<p class="src"><a href="' + esc(o.fonte.url) + '" target="_blank" rel="noopener">' + esc(o.fonte.rotulo) + '</a></p></article>';
   }
 
+  /* Paginação: 10 resultados por vez; o botão revela os próximos 10. Volta a 10 quando um filtro muda. */
+  const PASSO = 10;
+  const mostrar = { raq: PASSO, cor: PASSO };
+  function rodapeLista(id, total, n, rotulo) {
+    const el = $(id); if (!el) return;
+    if (total <= PASSO) { el.innerHTML = ''; return; }
+    const vis = Math.min(n, total), falta = total - vis, prox = Math.min(PASSO, falta);
+    el.innerHTML = '<p class="nota" role="status">Mostrando ' + vis + ' de ' + total + ' ' + rotulo + '</p>' +
+      (falta > 0 ? '<button type="button" class="mais-btn" data-mais="' + (id === '#mais-raq' ? 'raq' : 'cor') + '">Exibir próximos ' + prox + '</button>' : '');
+  }
+
   function render() {
     const f = $('#perfil');
     const orc = f.orcamento.value.trim();
@@ -50,8 +61,10 @@
     const cs = r.cordas.filter((o) => !f.tipo.value || cd[o.id].tipo === f.tipo.value);
     $('#h-raq').textContent = 'Raquetes (' + rs.length + ')';
     $('#h-cor').textContent = 'Cordas (' + cs.length + ')';
-    $('#raquetes').innerHTML = rs.length ? rs.map((o, i) => cardRaquete(o, i, rq[o.id])).join('') : '<p class="nota">Nenhuma raquete desta marca no cadastro.</p>';
-    $('#cordas').innerHTML = cs.length ? cs.map((o, i) => cardCorda(o, i, cd[o.id])).join('') : '<p class="nota">Nenhuma corda cadastrada com esses filtros e este orçamento.</p>';
+    $('#raquetes').innerHTML = rs.length ? rs.slice(0, mostrar.raq).map((o, i) => cardRaquete(o, i, rq[o.id])).join('') : '<p class="nota">Nenhuma raquete desta marca no cadastro.</p>';
+    $('#cordas').innerHTML = cs.length ? cs.slice(0, mostrar.cor).map((o, i) => cardCorda(o, i, cd[o.id])).join('') : '<p class="nota">Nenhuma corda cadastrada com esses filtros e este orçamento.</p>';
+    rodapeLista('#mais-raq', rs.length, mostrar.raq, 'raquetes');
+    rodapeLista('#mais-cor', cs.length, mostrar.cor, 'cordas');
     const hb = Object.fromEntries(Dados.hibridos.map((x) => [x.id, x]));
     $('#h-hib').textContent = 'Híbridos de corda (' + r.hibridos.length + ')';
     $('#sug-hib').innerHTML = r.sugestoes_hibrido.map((s) => '<p class="aviso"><strong>' + esc(s.titulo) + '.</strong> ' + esc(s.texto) + ' <a href="' + esc(s.fonte.url) + '" target="_blank" rel="noopener">' + esc(s.fonte.rotulo) + '</a></p>').join('');
@@ -64,6 +77,11 @@
   Object.keys(Dados.tipos).filter((t) => Dados.cordas.some((c) => c.tipo === t)).forEach((t) => ft.insertAdjacentHTML('beforeend', '<option value="' + esc(t) + '">' + esc(Dados.tipos[t].rotulo) + '</option>'));
 
   $('#fontes').innerHTML = '<strong>Fontes gerais:</strong> ' + Object.values(Dados.fontes).map((s) => '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.rotulo) + '</a>').join(' · ');
-  $('#perfil').addEventListener('input', render);
+  $('#perfil').addEventListener('input', () => { mostrar.raq = PASSO; mostrar.cor = PASSO; render(); });
+  document.addEventListener('click', (ev) => {
+    const b = ev.target.closest('.mais-btn'); if (!b) return;
+    const k = b.dataset.mais; mostrar[k] += PASSO; render();
+    const novo = document.querySelector('[data-mais="' + k + '"]'); if (novo) novo.focus({ preventScroll: true });
+  });
   render();
 })();
