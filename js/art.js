@@ -121,6 +121,15 @@
 
     ligar('#estilos', ESTILOS, 'estilo');
     ligar('#cotovelos', COTOVELO, 'cotovelo');
+    /* Topo: mostra o personagem do estilo e o do cotovelo escolhidos. */
+    const heroi = el('#heroi'); const f = el('#perfil');
+    if (heroi && f) {
+      const atualizar = () => {
+        const a = ESTILOS[f.estilo.value], b = COTOVELO[f.cotovelo.value];
+        heroi.innerHTML = (a ? '<span class="h-grande">' + a.svg + '</span>' : '') + (b ? '<span class="h-pequeno">' + b.svg + '</span>' : '');
+      };
+      f.addEventListener('input', atualizar); f.addEventListener('change', atualizar); atualizar();
+    }
   }
 
   /* Cada botão-personagem escolhe uma opção do <select> de mesmo nome e dispara o recálculo. */

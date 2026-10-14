@@ -58,3 +58,9 @@ a { color:var(--ac); }
 .src { font-size:.82rem; }
 .rodape { background:var(--quadra2); color:#cfe3d6; text-align:center; font-size:.82rem; padding:18px 16px; border-top:4px solid var(--bola); }
 .sub-h { font-size:1.1rem; margin:22px 0 6px; }
+.heroi { position:absolute; right:max(16px, calc(50% - 480px)); bottom:-4px; display:flex; align-items:flex-end; gap:0; pointer-events:none; }
+.heroi svg { display:block; width:100%; }
+.h-grande { width:150px; } .h-pequeno { width:100px; margin-left:-14px; }
+.heroi .h-grande, .heroi .h-pequeno { filter:drop-shadow(0 4px 6px rgba(0,0,0,.35)); }
+.bola-quica { right:auto; left:68%; }
+@media (max-width:720px) { .heroi { display:none; } .bola-quica { left:auto; right:8%; } }
