@@ -57,3 +57,4 @@ select, input { font:inherit; padding:10px; border:1px solid var(--bd); border-r
 a { color:var(--ac); }
 .src { font-size:.82rem; }
 .rodape { background:var(--quadra2); color:#cfe3d6; text-align:center; font-size:.82rem; padding:18px 16px; border-top:4px solid var(--bola); }
+.sub-h { font-size:1.1rem; margin:22px 0 6px; }

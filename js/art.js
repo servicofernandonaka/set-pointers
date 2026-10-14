@@ -69,6 +69,34 @@
     },
   };
 
+  /* Personagens do filtro "Cotovelo". Ilustram a situação; não são orientação clínica. */
+  const COTOVELO = {
+    nao: {
+      nome: 'O Inteiro', frase: 'Sem queixa no cotovelo. Joga solto.',
+      svg: figura({ alt: 'Personagem sorridente com o braço levantado, sem queixa', pele: '#f1c9a5', camisa: '#0aa5a0', short: '#223', raq: '#0aa5a0',
+        braco: [108, 40], ang: 25,
+        bone: '<path d="M46 34 Q70 12 94 34Z" fill="#0aa5a0"/><rect x="44" y="32" width="52" height="5" rx="2.5" fill="#fff"/>',
+        boca: '<path d="M60 50 Q70 62 80 50Z" fill="#fff" stroke="#222" stroke-width="2" stroke-linejoin="round"/>',
+        extra: '<path d="M20 20 l4 8 M30 14 l2 9" stroke="#f2c200" stroke-width="3" stroke-linecap="round"/>' })
+    },
+    historico: {
+      nome: 'O Precavido', frase: 'Já teve dor. Cuida da tensão e do quadro antes de entrar em quadra.',
+      svg: figura({ alt: 'Personagem com faixa no antebraço, olhando a raquete com atenção', pele: '#b07a52', camisa: '#7a5cd6', short: '#f2f2f2', raq: '#7a5cd6',
+        braco: [106, 84], ang: 70,
+        bone: '<path d="M46 34 Q70 12 94 34Z" fill="#7a5cd6"/><rect x="44" y="32" width="52" height="5" rx="2.5" fill="#fff"/>',
+        boca: '<path d="M63 54 H77" stroke="#222" stroke-width="2.4" stroke-linecap="round"/>',
+        extra: '<path d="M54 36 L66 38 M86 36 L74 38" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><rect x="92" y="75" width="9" height="12" rx="3" transform="rotate(28 96 81)" fill="#f2c200" stroke="#b58f00"/>' })
+    },
+    dor_atual: {
+      nome: 'O Descanso', frase: 'Dor agora. Prioriza o que é mais amigável ao braço; vale avaliação profissional.',
+      svg: figura({ alt: 'Personagem com bolsa de gelo no cotovelo e a raquete baixa, em repouso', pele: '#e0ac7e', camisa: '#5aa0e6', short: '#223', raq: '#5aa0e6',
+        braco: [100, 104], ang: 150,
+        bone: '<path d="M45 34 Q70 18 95 34 L108 38 L94 40 Q70 30 46 40Z" fill="#fff" stroke="#c9d3cf"/>',
+        boca: '<path d="M62 56 Q70 50 78 56" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>',
+        extra: '<path d="M60 38 L66 36 M80 38 L74 36" stroke="#222" stroke-width="2.4" stroke-linecap="round"/><rect x="88" y="76" width="16" height="14" rx="4" fill="#bfe6ff" stroke="#5aa0e6" stroke-width="2"/><path d="M92 80 h8 M92 85 h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><text x="22" y="30" font-size="14" font-family="Georgia,serif" font-weight="700" fill="#5aa0e6">z z</text>' })
+    },
+  };
+
   const LOGO = '<svg viewBox="0 0 64 64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">' +
     '<circle cx="32" cy="32" r="30" fill="' + BOLA + '" stroke="#9db81c" stroke-width="2"/>' +
     '<path d="M6 20 Q26 32 6 46 M58 18 Q38 32 58 48" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>' +
@@ -91,16 +119,22 @@
     if (el('#quadra')) el('#quadra').innerHTML = QUADRA;
     ['raquete', 'corda', 'hibrido'].forEach((k) => { const n = el('#ic-' + k); if (n) n.innerHTML = ICONE[k]; });
 
-    const alvo = el('#estilos'); const sel = el('#perfil') && el('#perfil').estilo;
+    ligar('#estilos', ESTILOS, 'estilo');
+    ligar('#cotovelos', COTOVELO, 'cotovelo');
+  }
+
+  /* Cada botão-personagem escolhe uma opção do <select> de mesmo nome e dispara o recálculo. */
+  function ligar(seletor, grupo, campo) {
+    const alvo = document.querySelector(seletor); const sel = document.querySelector('#perfil') && document.querySelector('#perfil')[campo];
     if (!alvo || !sel) return;
-    alvo.innerHTML = Object.keys(ESTILOS).map((k) => {
-      const e = ESTILOS[k];
-      return '<button type="button" class="estilo" data-estilo="' + k + '" aria-pressed="false"><span class="fig">' + e.svg + '</span><strong>' + e.nome + '</strong><span>' + e.frase + '</span></button>';
+    alvo.innerHTML = Object.keys(grupo).map((k) => {
+      const e = grupo[k];
+      return '<button type="button" class="estilo" data-valor="' + k + '" aria-pressed="false"><span class="fig">' + e.svg + '</span><strong>' + e.nome + '</strong><span>' + e.frase + '</span></button>';
     }).join('');
-    const marcar = () => alvo.querySelectorAll('.estilo').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.estilo === sel.value)));
+    const marcar = () => alvo.querySelectorAll('.estilo').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.valor === sel.value)));
     alvo.addEventListener('click', (ev) => {
       const b = ev.target.closest('.estilo'); if (!b) return;
-      sel.value = b.dataset.estilo; marcar();
+      sel.value = b.dataset.valor; marcar();
       sel.dispatchEvent(new Event('input', { bubbles: true }));
     });
     sel.addEventListener('change', marcar);
